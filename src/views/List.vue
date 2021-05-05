@@ -48,22 +48,36 @@
 
     <v-main>
       <v-container>
-        <v-row>
-          <v-col
-            v-for="category in categories"
-            :key="category.title"
-            cols="3"
-            md="2"
-          >
-            <v-card height="150" width="500" :to="category.router">
-              <v-card-title>{{ category.title }}</v-card-title>
-              <v-card-subtitle v-if="category.count > 1"
-                >{{ category.count }} Elemente</v-card-subtitle
-              >
-              <v-card-subtitle v-else> Ein Element</v-card-subtitle>
-            </v-card>
-          </v-col>
-        </v-row>
+        <v-card>
+          <v-list two-line>
+            <v-list-item-group v-model="selected">
+              <template v-for="(item, index) in items">
+                <v-list-item :key="item.title">
+                  <v-list-item-avatar>
+                    <v-img :src="item.image"></v-img>
+                  </v-list-item-avatar>
+
+                  <v-list-item-content>
+                    <v-list-item-title v-text="item.title"></v-list-item-title>
+
+                    <v-list-item-subtitle
+                      v-text="item.subtitle"
+                    ></v-list-item-subtitle>
+                  </v-list-item-content>
+
+                  <v-list-item-action>
+                    <v-btn icon>
+                      <v-icon color="grey lighten-1">mdi-information</v-icon>
+                    </v-btn>
+                  </v-list-item-action>
+                </v-list-item>
+
+                <v-divider v-if="index + 1 != items.length" :key="index" inset>
+                </v-divider>
+              </template>
+            </v-list-item-group>
+          </v-list>
+        </v-card>
       </v-container>
     </v-main>
   </v-app>
@@ -73,10 +87,27 @@
 export default {
   data: () => ({
     drawer: null,
-    categories: [
-      { title: "Kühlschrank", count: "4", router: "/list" },
-      { title: "Schrank", count: "4", router: "/list" },
-      { title: "Meister Proper Handkiste", count: "4", router: "/list" },
+    items: [
+      {
+        title: "Title",
+        image: "https://avatars.githubusercontent.com/u/73351643?s=200&v=4",
+        subtitle: "Subtitle",
+      },
+      {
+        title: "Title",
+        image: "https://avatars.githubusercontent.com/u/73351643?s=200&v=4",
+        subtitle: "Subtitle",
+      },
+      {
+        title: "Title",
+        image: "https://avatars.githubusercontent.com/u/73351643?s=200&v=4",
+        subtitle: "Subtitle",
+      },
+      {
+        title: "Title",
+        image: "https://avatars.githubusercontent.com/u/73351643?s=200&v=4",
+        subtitle: "Subtitle",
+      },
     ],
     folders: [
       { title: "Home", icon: "mdi-home" },
