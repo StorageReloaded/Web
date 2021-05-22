@@ -52,16 +52,16 @@
           <v-list two-line>
             <v-list-item-group v-model="selected">
               <template v-for="(item, index) in items">
-                <v-list-item :key="item.title">
+                <v-list-item :key="item.name">
                   <v-list-item-avatar>
                     <v-img :src="item.image"></v-img>
                   </v-list-item-avatar>
 
                   <v-list-item-content>
-                    <v-list-item-title v-text="item.title"></v-list-item-title>
+                    <v-list-item-title v-text="item.name"></v-list-item-title>
 
                     <v-list-item-subtitle
-                      v-text="item.subtitle"
+                      v-text="item.description"
                     ></v-list-item-subtitle>
                   </v-list-item-content>
 
@@ -87,37 +87,24 @@
 export default {
   data: () => ({
     drawer: null,
-    items: [
-      {
-        title: "Title",
-        image: "https://avatars.githubusercontent.com/u/73351643?s=200&v=4",
-        subtitle: "Subtitle",
-      },
-      {
-        title: "Title",
-        image: "https://avatars.githubusercontent.com/u/73351643?s=200&v=4",
-        subtitle: "Subtitle",
-      },
-      {
-        title: "Title",
-        image: "https://avatars.githubusercontent.com/u/73351643?s=200&v=4",
-        subtitle: "Subtitle",
-      },
-      {
-        title: "Title",
-        image: "https://avatars.githubusercontent.com/u/73351643?s=200&v=4",
-        subtitle: "Subtitle",
-      },
-    ],
+    items: [],
     folders: [
       { title: "Home", icon: "mdi-home" },
       { title: "Account", icon: "mdi-account" },
       { title: "Dashboard", icon: "mdi-view-dashboard" },
       { title: "Photos", icon: "mdi-image" },
       { title: "About", icon: "mdi-help-box" },
-      { title: "Test", icon: "mdi-logout" },
     ],
     right: null,
   }),
+  mounted() {
+    fetch("http://localhost:8081/api/v1/items", {
+      headers: {
+        "X-StoRe-Session": "JsfF5l1k",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => (this.items = data));
+  },
 };
 </script>
