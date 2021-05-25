@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home.vue'
+import { isAuthenticated } from '../api/api'
 
 Vue.use(VueRouter)
 
@@ -32,8 +33,13 @@ const routes: Array<RouteConfig> = [
   }
 ]
 
-const router = new VueRouter({
-  routes
+const router = new VueRouter({ routes })
+
+router.beforeEach((to, from, next) => {
+  if (to.name !== 'Login' && !isAuthenticated()) {
+    next({ name: 'Login' })
+  } else
+    next()
 })
 
 export default router
