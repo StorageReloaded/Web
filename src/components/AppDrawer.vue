@@ -1,6 +1,12 @@
 <template>
   <div>
-    <v-navigation-drawer v-model="drawer" expand-on-hover app clipped permanent>
+    <v-navigation-drawer
+      v-model="drawer"
+      :expand-on-hover="!fixedDrawer"
+      app
+      clipped
+      permanent
+    >
       <v-list dense nav>
         <v-list-item
           v-for="folder in folders"
@@ -30,7 +36,9 @@
     </v-navigation-drawer>
 
     <v-app-bar app color="primary" elevate-on-scroll clipped-left>
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon
+        v-on:click="fixedDrawer = !fixedDrawer"
+      ></v-app-bar-nav-icon>
 
       <v-avatar size="44" style="margin: 0 8px">
         <v-img
@@ -61,6 +69,7 @@ export default Vue.extend({
   name: "NavigationDrawer",
   data: () => ({
     drawer: true,
+    fixedDrawer: false,
     folders: [
       { title: "Home", icon: "mdi-home", link: "#/" },
       { title: "Tags", icon: "mdi-tag-multiple", link: "#/tags" },
