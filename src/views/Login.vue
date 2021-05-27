@@ -11,6 +11,7 @@
         <v-card-text three-line>
           <v-text-field
             v-model="credentials.username"
+            v-on:keyup.enter="login"
             outlined
             dense
             label="Username"
@@ -20,6 +21,7 @@
 
           <v-text-field
             v-model="credentials.password"
+            v-on:keyup.enter="login"
             outlined
             dense
             label="Password"
