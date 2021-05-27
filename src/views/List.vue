@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import { getSessionId } from "@/api/api";
 import AppDrawer from "@/components/AppDrawer.vue";
 
 export default {
@@ -49,7 +50,7 @@ export default {
   mounted() {
     fetch("http://localhost:8081/api/v1/items", {
       headers: {
-        "X-StoRe-Session": "JsfF5l1k",
+        "X-StoRe-Session": getSessionId(),
       },
     })
       .then((response) => response.json())
