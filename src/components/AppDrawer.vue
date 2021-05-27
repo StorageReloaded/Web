@@ -41,9 +41,7 @@
       ></v-app-bar-nav-icon>
 
       <v-avatar size="44" style="margin: 0 8px">
-        <v-img
-          src="https://avatars.githubusercontent.com/u/73351643?s=200&v=4"
-        ></v-img>
+        <v-img :src="require('@/assets/logo.png')"></v-img>
       </v-avatar>
 
       <v-toolbar-title>Storage Reloaded</v-toolbar-title>
