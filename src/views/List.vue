@@ -3,7 +3,7 @@
     <app-drawer></app-drawer>
     <v-main>
       <v-container>
-        <v-card>
+        <v-card v-if="items.length > 0">
           <v-list two-line>
             <v-list-item-group v-model="selected">
               <template v-for="(item, index) in items">
@@ -32,6 +32,14 @@
               </template>
             </v-list-item-group>
           </v-list>
+        </v-card>
+        <v-card v-else width="max-content" style="margin: auto">
+          <v-card-title>
+            Whoops! No item has been added to your collection yet!
+          </v-card-title>
+          <v-card-text>
+            After registering your first items, they'll be displayed here!
+          </v-card-text>
         </v-card>
       </v-container>
     </v-main>
