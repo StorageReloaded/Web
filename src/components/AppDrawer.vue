@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-navigation-drawer v-model="drawer" expand-on-hover app clipped>
+    <v-navigation-drawer v-model="drawer" expand-on-hover app clipped permanent>
       <v-list dense nav>
         <v-list-item
           v-for="folder in folders"
@@ -30,13 +30,13 @@
     </v-navigation-drawer>
 
     <v-app-bar app color="primary" elevate-on-scroll clipped-left>
-      <v-app-bar-nav-icon>
-        <v-avatar>
-          <v-img
-            src="https://avatars.githubusercontent.com/u/73351643?s=200&v=4"
-          ></v-img>
-        </v-avatar>
-      </v-app-bar-nav-icon>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+
+      <v-avatar size="44" style="margin: 0 8px">
+        <v-img
+          src="https://avatars.githubusercontent.com/u/73351643?s=200&v=4"
+        ></v-img>
+      </v-avatar>
 
       <v-toolbar-title>Storage Reloaded</v-toolbar-title>
 
@@ -60,7 +60,7 @@ import { getSessionId, deleteSessionId } from "../api/api";
 export default Vue.extend({
   name: "NavigationDrawer",
   data: () => ({
-    drawer: null,
+    drawer: true,
     folders: [
       { title: "Home", icon: "mdi-home", link: "#/" },
       { title: "Tags", icon: "mdi-tag-multiple", link: "#/tags" },
