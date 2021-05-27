@@ -15,7 +15,6 @@
             outlined
             dense
             label="Username"
-            clearable
           >
           </v-text-field>
 
