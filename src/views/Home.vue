@@ -1,50 +1,6 @@
 <template>
   <v-app>
-    <v-navigation-drawer v-model="drawer" expand-on-hover app clipped>
-      <v-list dense nav>
-        <v-list-item v-for="folder in folders" :key="folder.title" link>
-          <v-list-item-icon>
-            <v-icon>{{ folder.icon }}</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>{{ folder.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-
-        <v-divider></v-divider>
-
-        <v-list-item link>
-          <v-list-item-icon>
-            <v-icon>mdi-logout</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-title>Logout</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-
-    <v-app-bar app color="primary" elevate-on-scroll clipped-left>
-      <v-app-bar-nav-icon>
-        <v-avatar>
-          <v-img
-            src="https://avatars.githubusercontent.com/u/73351643?s=200&v=4"
-          ></v-img>
-        </v-avatar>
-      </v-app-bar-nav-icon>
-
-      <v-toolbar-title>Storage Reloaded</v-toolbar-title>
-
-      <v-spacer></v-spacer>
-
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-    </v-app-bar>
+    <app-drawer></app-drawer>
 
     <v-main>
       <v-container>
@@ -70,23 +26,18 @@
 </template>
 
 <script>
+import AppDrawer from "@/components/AppDrawer.vue";
+
 export default {
+  components: {
+    AppDrawer,
+  },
   data: () => ({
-    drawer: null,
     categories: [
       { title: "Kühlschrank", count: "4", router: "/list" },
       { title: "Schrank", count: "4", router: "/list" },
       { title: "Meister Proper Handkiste", count: "4", router: "/list" },
     ],
-    folders: [
-      { title: "Home", icon: "mdi-home" },
-      { title: "Account", icon: "mdi-account" },
-      { title: "Dashboard", icon: "mdi-view-dashboard" },
-      { title: "Photos", icon: "mdi-image" },
-      { title: "About", icon: "mdi-help-box" },
-      { title: "Test", icon: "mdi-logout" },
-    ],
-    right: null,
   }),
 };
 </script>

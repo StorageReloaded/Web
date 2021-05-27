@@ -21,6 +21,10 @@ function getCookie(name: string) {
     return "";
 }
 
+function deleteCookie(name: string) {
+    document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
 export function getSessionId(): string {
     return getCookie("sessionId");
 }
@@ -32,4 +36,8 @@ export function setSessionId(sessionId: string, remember: boolean) {
 export function isAuthenticated(): boolean {
     console.log(getSessionId())
     return getSessionId() != "";
+}
+
+export function deleteSessionId(): void {
+    deleteCookie("sessionId");
 }
