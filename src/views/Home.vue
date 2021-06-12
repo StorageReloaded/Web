@@ -39,5 +39,20 @@ export default {
       { title: "Meister Proper Handkiste", count: "4", router: "/list" },
     ],
   }),
+  methods: {
+    login: function (event) {
+      fetch("http://localhost:8081/api/v1/auth", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(this.databanks),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setSessionId(data.session_id, this.remember);
+          this.$router.push({ name: "Home" });
+        });
+    },
 };
 </script>
