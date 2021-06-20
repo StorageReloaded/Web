@@ -34,10 +34,24 @@ export function setSessionId(sessionId: string, remember: boolean) {
 }
 
 export function isAuthenticated(): boolean {
-    console.log(getSessionId())
+    console.log(getSessionId());
     return getSessionId() != "";
 }
 
 export function deleteSessionId(): void {
     deleteCookie("sessionId");
+}
+
+export function getServerAddress(): string {
+    const cookieAddress: string = getCookie("serverAddress");
+    console.log(cookieAddress);
+    if (cookieAddress == "") {
+        return "https://" + window.location.hostname;
+    }
+    return "https://" + cookieAddress;
+}
+
+export function setServerAddress(url: string): void {
+    console.log(url);
+    setCookie("serverAddress", url, true);
 }

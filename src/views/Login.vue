@@ -3,7 +3,7 @@
     <v-container fill-height fluid primary>
       <v-card
         class="mx-auto"
-        max-width="400"
+        width="300"
         outlined
         align="center"
         justify="center"
@@ -30,6 +30,15 @@
           >
           </v-text-field>
 
+          <v-text-field
+            v-model="url"
+            v-on:keyup.enter="login"
+            outlined
+            dense
+            label="Server-Address (Optional)"
+          >
+          </v-text-field>
+
           <v-checkbox v-model="remember" label="Remember me" color="primary">
           </v-checkbox>
 
@@ -41,12 +50,18 @@
 </template>
 
 <script>
-import { setSessionId } from "../api/api";
+import {
+  getSessionId,
+  setSessionId,
+  setServerAddress,
+  getServerAddress,
+} from "../api/api";
 import Vue from "vue";
 
 export default Vue.extend({
   name: "Login",
   data: () => ({
+    url: "",
     showPass: false,
     remember: false,
     credentials: {
@@ -56,7 +71,8 @@ export default Vue.extend({
   }),
   methods: {
     login: function (event) {
-      fetch("http://localhost:8081/api/v1/auth", {
+      setServerAddress(this.url);
+      fetch(getServerAddress() + "/api/v1/auth", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
