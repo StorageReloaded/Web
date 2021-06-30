@@ -35,12 +35,18 @@ const routes: Array<RouteConfig> = [
     path: '/account',
     name: 'Account',
     component: () => import('../views/Account.vue')
+    //Account page
+  }, {
+    path: '/tags',
+    name: 'Tags',
+    component: () => import('../views/Tags.vue')
+    //Tags page
   }
 ]
 
 const router = new VueRouter({ routes })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, from, next) => {             //Check if the user is logged in
   if (to.name !== 'Login' && !isAuthenticated()) {
     next({ name: 'Login' })
   } else
