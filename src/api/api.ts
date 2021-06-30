@@ -46,9 +46,9 @@ export function getServerAddress(): string {
     const cookieAddress: string = getCookie("serverAddress");
     console.log(cookieAddress);
     if (cookieAddress == "") {
-        return "https://" + window.location.hostname;
+        return window.location.protocol + "//" + window.location.hostname;
     }
-    return "https://" + cookieAddress;
+    return window.location.protocol + "//" + cookieAddress;
 }
 
 export function setServerAddress(url: string): void {
