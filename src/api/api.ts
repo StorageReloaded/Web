@@ -46,7 +46,7 @@ export function getServerAddress(): string {
     const cookieAddress: string = getCookie("serverAddress");
     console.log(cookieAddress);
     if (cookieAddress == "") {
-        return window.location.protocol + "//" + window.location.hostname;
+        return window.location.origin;
     }
     return window.location.protocol + "//" + cookieAddress;
 }
