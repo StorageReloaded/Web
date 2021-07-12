@@ -1,19 +1,17 @@
 <template>
   <v-app>
-    <v-container fill-height fluid primary>
-      <v-card
-        class="mx-auto"
-        width="300"
-        outlined
-        align="center"
-        justify="center"
-      >
-        <v-card-text three-line>
+    <v-container fill-height fluid>
+      <v-card class="mx-auto" width="500" outlined style="padding: 32px">
+        <v-img
+          :src="require('@/assets/banner.svg')"
+          style="margin: 16px 64px"
+        ></v-img>
+
+        <v-card-text>
           <v-text-field
             v-model="credentials.username"
             v-on:keyup.enter="login"
             outlined
-            dense
             label="Username"
           >
           </v-text-field>
@@ -22,7 +20,6 @@
             v-model="credentials.password"
             v-on:keyup.enter="login"
             outlined
-            dense
             label="Password"
             :type="showPass ? 'text' : 'password'"
             :append-icon="showPass ? 'mdi-eye' : 'mdi-eye-off'"
@@ -34,15 +31,26 @@
             v-model="url"
             v-on:keyup.enter="login"
             outlined
-            dense
             label="Server-Address (Optional)"
           >
           </v-text-field>
 
-          <v-checkbox v-model="remember" label="Remember me" color="primary">
-          </v-checkbox>
-
-          <v-btn v-on:click="login" color="primary"> Login </v-btn>
+          <div style="display: flex; flex-direction: row">
+            <v-checkbox
+              v-model="remember"
+              label="Remember me"
+              color="primary"
+            >
+            </v-checkbox>
+            <v-spacer></v-spacer>
+            <v-btn
+              v-on:click="login"
+              color="primary"
+              style="align-self: center"
+            >
+              Login
+            </v-btn>
+          </div>
         </v-card-text>
       </v-card>
     </v-container>
