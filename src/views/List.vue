@@ -95,6 +95,7 @@
 
 <script>
 import { getSessionId, getServerAddress } from "@/api/storage";
+import { getItems, getLocations } from "@/api/network";
 import AppDrawer from "@/components/AppDrawer.vue";
 
 export default {
@@ -119,27 +120,14 @@ export default {
     },
   },
   mounted() {
-    fetch(getServerAddress() + "/api/v1/locations", {
-      //Fetch locations from server
-      headers: {
-        "X-StoRe-Session": getSessionId(),
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        data.forEach((location) => {
-          this.locations[location.id] = location;
-        });
+    getLocations().then((data) => {
+      data.forEach((location) => {
+        this.locations[location.id] = location;
       });
-    fetch(getServerAddress() + "/api/v1/items", {
-      //Fetch Items from server
-      headers: {
-        "X-StoRe-Session": getSessionId(),
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        this.baseItems = data;
+    });
+
+    getItems().then((items) => {
+      this.baseItems = items;
         console.log(this.baseItems);
       });
   },
