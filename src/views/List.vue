@@ -12,7 +12,7 @@
                   <template v-for="(item, index) in items">
                     <!-- For every item a list item -->
                     <v-list-item
-                      v-on:click="selection = items[index]"
+                      v-on:click="selectedItem = items[index]"
                       :key="item.name"
                     >
                       <v-list-item-avatar>
@@ -60,22 +60,22 @@
             </v-card>
           </v-container>
         </v-col>
-        <v-col v-if="selection != -1">
+        <v-col v-if="selectedItem != -1">
           <v-container>
             <v-img
-              :src="selection.image"
+              :src="selectedItem.image"
               max-width="500"
               max-height="500"
             ></v-img>
-            <v-text-field label="Name" v-model="selection.name"></v-text-field>
+            <v-text-field label="Name" v-model="selectedItem.name"></v-text-field>
             <v-text-field
               label="Description"
-              v-model="selection.description"
+              v-model="selectedItem.description"
             ></v-text-field>
             <v-text-field
               type="number"
               label="Amount"
-              v-model.number="selection.amount"
+              v-model.number="selectedItem.amount"
             ></v-text-field>
             <v-btn
               style="margin-right: 16px"
@@ -93,32 +93,57 @@
   </v-app>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from "vue";
+import Component from "vue-class-component";
+
 import { getSessionId, getServerAddress } from "@/api/storage";
 import { getItems, getLocations } from "@/api/network";
 import AppDrawer from "@/components/AppDrawer.vue";
 
-export default {
-  components: { AppDrawer },
-  data: () => ({
-    baseItems: [], //An empty array for storing the items.
-    locations: [], //An empty array for storing the databases.
-    selected: null, //A boolean for the selection event.
-    selection: -1, //A integer for determining the selected item. Default -1
-  }),
-  computed: {
-    items: function () {
-      //Get items/databases into the array.
-      let items = [];
-      this.baseItems.forEach((item) => {
-        if (this.locations[item.location].database == this.$route.params.id) {
-          //Filter out the items which are not in the shown location
-          items.push(item);
-        }
-      });
-      return items;
-    },
-  },
+@Component
+export default class List extends Vue {
+  selected: any = null;
+  baseItems: Array<StoRe.Item> = [];
+  locations: Array<StoRe.Location> = [];
+  selectedItem: StoRe.Item = null;
+
+  // gives back all items that should be shown
+  get items() {
+    let items: Array<StoRe.Item> = [];
+    this.baseItems.forEach((item) => {
+      if (
+        this.locations[item.location].database.toString() ==
+        this.$route.params.id
+      ) {
+        //Filter out the items which are not in the shown location
+        items.push(item);
+      }
+    });
+    return items;
+  }
+
+  update() {
+    fetch(getServerAddress() + "/api/v1/item/" + this.selectedItem.id, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-StoRe-Session": getSessionId(),
+      },
+      body: JSON.stringify(this.selectedItem),
+    });
+  }
+
+  remove() {
+    fetch(getServerAddress() + "/api/v1/item/" + this.selectedItem.id, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "X-StoRe-Session": getSessionId(),
+      },
+    });
+  }
+
   mounted() {
     getLocations().then((data) => {
       data.forEach((location) => {
@@ -128,29 +153,8 @@ export default {
 
     getItems().then((items) => {
       this.baseItems = items;
-        console.log(this.baseItems);
-      });
-  },
-  methods: {
-    update: function (event) {
-      fetch(getServerAddress() + "/api/v1/item/" + this.selection.id, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-StoRe-Session": getSessionId(),
-        },
-        body: JSON.stringify(this.selection),
-      });
-    },
-    remove: function (event) {
-      fetch(getServerAddress() + "/api/v1/item/" + this.selection.id, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          "X-StoRe-Session": getSessionId(),
-        },
-      });
-    },
-  },
-};
+      console.log(this.baseItems);
+    });
+  }
+}
 </script>
