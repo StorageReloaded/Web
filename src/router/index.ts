@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home.vue'
-import { isAuthenticated } from '../api/api'
+import { isAuthenticated } from '../api/storage'
 
 Vue.use(VueRouter)
 

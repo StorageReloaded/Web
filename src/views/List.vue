@@ -94,7 +94,7 @@
 </template>
 
 <script>
-import { getSessionId, getServerAddress } from "@/api/api";
+import { getSessionId, getServerAddress } from "@/api/storage";
 import AppDrawer from "@/components/AppDrawer.vue";
 
 export default {

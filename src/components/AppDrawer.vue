@@ -61,7 +61,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { getSessionId, deleteSessionId } from "../api/api";
+import { getSessionId, deleteSessionId } from "../api/storage";
 
 export default Vue.extend({
   name: "NavigationDrawer",

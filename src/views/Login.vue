@@ -63,7 +63,7 @@ import {
   setSessionId,
   setServerAddress,
   getServerAddress,
-} from "../api/api";
+} from "../api/storage";
 import Vue from "vue";
 
 export default Vue.extend({
