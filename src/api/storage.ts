@@ -44,14 +44,15 @@ export function deleteSessionId(): void {
 
 export function getServerAddress(): string {
     const cookieAddress: string = getCookie("serverAddress");
-    console.log(cookieAddress);
     if (cookieAddress == "") {
         return window.location.origin;
     }
-    return window.location.protocol + "//" + cookieAddress;
+    return cookieAddress;
 }
 
 export function setServerAddress(url: string): void {
-    console.log(url);
+    if(!url.startsWith("http://") && !url.startsWith("https://")){
+        url = "https://" + url;
+    }
     setCookie("serverAddress", url, true);
 }

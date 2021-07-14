@@ -27,20 +27,32 @@
           >
           </v-text-field>
 
-          <v-text-field
-            v-model="url"
-            v-on:keyup.enter="login"
-            outlined
-            label="Server-Address (Optional)"
-          >
-          </v-text-field>
+          <v-expansion-panels v-model="panel" :disabled="disabled" flat>
+            <v-expansion-panel>
+              <v-expansion-panel-header
+                >Advanced Settings</v-expansion-panel-header
+              >
+              <v-expansion-panel-content>
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-text-field
+                      v-model="url"
+                      v-on:keyup.enter="login"
+                      v-bind="attrs"
+                      v-on="on"
+                      outlined
+                      label="Server-Address (Optional)"
+                    >
+                    </v-text-field>
+                  </template>
+                  <span>https://store.examle.com</span>
+                </v-tooltip>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+          </v-expansion-panels>
 
           <div style="display: flex; flex-direction: row">
-            <v-checkbox
-              v-model="remember"
-              label="Remember me"
-              color="primary"
-            >
+            <v-checkbox v-model="remember" label="Remember me" color="primary">
             </v-checkbox>
             <v-spacer></v-spacer>
             <v-btn
