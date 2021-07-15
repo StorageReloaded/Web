@@ -1,4 +1,5 @@
 import { getSessionId, getServerAddress } from "@/api/storage";
+import {Item, Location} from "@/model/model"
 
 function request(path: string): Promise<any> {
     return fetch(getServerAddress() + "/api/v1/" + path, {
@@ -8,16 +9,16 @@ function request(path: string): Promise<any> {
     }).then(response => response.json())
 }
 
-export function getItems(): Promise<Array<StoRe.Item>> {
-    const promise: Promise<Array<StoRe.Item>> = new Promise((resolve, reject) => {
-        request("items").then((items: Array<StoRe.Item>) => resolve(items));
+export function getItems(): Promise<Array<Item>> {
+    const promise: Promise<Array<Item>> = new Promise((resolve, reject) => {
+        request("items").then((items: Array<Item>) => resolve(items));
     });
     return promise;
 }
 
-export function getLocations(): Promise<Array<StoRe.Location>> {
-    const promise: Promise<Array<StoRe.Location>> = new Promise((resolve, reject) => {
-        request("locations").then((locations: Array<StoRe.Location>) => resolve(locations));
+export function getLocations(): Promise<Array<Location>> {
+    const promise: Promise<Array<Location>> = new Promise((resolve, reject) => {
+        request("locations").then((locations: Array<Location>) => resolve(locations));
     });
     return promise;
 }

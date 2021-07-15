@@ -60,14 +60,17 @@
             </v-card>
           </v-container>
         </v-col>
-        <v-col v-if="selectedItem != -1">
+        <v-col v-if="selectedItem != null">
           <v-container>
             <v-img
               :src="selectedItem.image"
               max-width="500"
               max-height="500"
             ></v-img>
-            <v-text-field label="Name" v-model="selectedItem.name"></v-text-field>
+            <v-text-field
+              label="Name"
+              v-model="selectedItem.name"
+            ></v-text-field>
             <v-text-field
               label="Description"
               v-model="selectedItem.description"
@@ -96,27 +99,27 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
+import AppDrawer from "@/components/AppDrawer.vue";
 
 import { getSessionId, getServerAddress } from "@/api/storage";
 import { getItems, getLocations } from "@/api/network";
-import AppDrawer from "@/components/AppDrawer.vue";
+import { Item, Location } from "@/model/model";
 
-@Component
+@Component({ components: { AppDrawer } })
 export default class List extends Vue {
   selected: any = null;
-  baseItems: Array<StoRe.Item> = [];
-  locations: Array<StoRe.Location> = [];
-  selectedItem: StoRe.Item = null;
+  baseItems: Array<Item> = [];
+  locations: Array<Location> = [];
+  selectedItem: Item = null;
 
   // gives back all items that should be shown
   get items() {
-    let items: Array<StoRe.Item> = [];
+    let items: Array<Item> = [];
     this.baseItems.forEach((item) => {
       if (
-        this.locations[item.location].database.toString() ==
+        this.locations[item.location].database.toString() ===
         this.$route.params.id
       ) {
-        //Filter out the items which are not in the shown location
         items.push(item);
       }
     });
@@ -153,7 +156,6 @@ export default class List extends Vue {
 
     getItems().then((items) => {
       this.baseItems = items;
-      console.log(this.baseItems);
     });
   }
 }
