@@ -21,17 +21,18 @@
   </v-app>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from "vue";
+import Component from "vue-class-component";
+
 import { getSessionId, getServerAddress } from "@/api/storage";
 import AppDrawer from "@/components/AppDrawer.vue";
+import { Database } from "@/model/model";
 
-export default {
-  components: {
-    AppDrawer,
-  },
-  data: () => ({
-    databases: [],
-  }),
+@Component({ components: { AppDrawer } })
+export default class List extends Vue {
+  databases: Array<Database> = [];
+  
   mounted() {
     fetch(getServerAddress() + "/api/v1/databases", {
       headers: {
@@ -40,6 +41,6 @@ export default {
     })
       .then((response) => response.json())
       .then((data) => (this.databases = data));
-  },
-};
+  }
+}
 </script>
