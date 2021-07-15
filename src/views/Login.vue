@@ -69,42 +69,36 @@
   </v-app>
 </template>
 
-<script>
-import {
-  getSessionId,
-  setSessionId,
-  setServerAddress,
-  getServerAddress,
-} from "../api/storage";
+<script lang="ts">
+import { setSessionId, setServerAddress } from "@/api/storage";
+import {completeUrl} from "@/api/utils"
 import Vue from "vue";
+import Component from "vue-class-component";
 
-export default Vue.extend({
-  name: "Login",
-  data: () => ({
-    url: "",
-    showPass: false,
-    remember: false,
-    credentials: {
-      username: "",
-      password: "",
-    },
-  }),
-  methods: {
-    login: function (event) {
-      setServerAddress(this.url);
-      fetch(getServerAddress() + "/api/v1/auth", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(this.credentials),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          setSessionId(data.session_id, this.remember);
-          this.$router.push({ name: "Home" });
-        });
-    },
-  },
-});
+@Component
+export default class Login extends Vue {
+  url = "";
+  showPass = false;
+  remember = false;
+  credentials = {
+    username: "",
+    password: "",
+  };
+
+  login() {
+    fetch(completeUrl(this.url) + "/api/v1/auth", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(this.credentials),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setSessionId(data.session_id, this.remember);
+        setServerAddress(this.url);
+        this.$router.push({ name: "Home" });
+      });
+  }
+}
 </script>

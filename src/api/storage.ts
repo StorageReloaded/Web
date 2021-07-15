@@ -1,3 +1,5 @@
+import {completeUrl} from "@/api/utils"
+
 function setCookie(name: string, value: string, remember: boolean) {
     const date = new Date();
     date.setFullYear(date.getFullYear() + 10);
@@ -51,8 +53,5 @@ export function getServerAddress(): string {
 }
 
 export function setServerAddress(url: string): void {
-    if(!url.startsWith("http://") && !url.startsWith("https://")){
-        url = "https://" + url;
-    }
-    setCookie("serverAddress", url, true);
+    setCookie("serverAddress", completeUrl(url), true);
 }
