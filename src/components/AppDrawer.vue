@@ -61,32 +61,33 @@
 
 <script lang="ts">
 import Vue from "vue";
+import Component from "vue-class-component";
 import { getSessionId, deleteSessionId } from "../api/storage";
 
-export default Vue.extend({
-  name: "NavigationDrawer",
-  data: () => ({
-    drawer: true,
-    fixedDrawer: false,
-    folders: [
-      { title: "Home", icon: "mdi-home", link: "#/" },
-      { title: "Tags", icon: "mdi-tag-multiple", link: "#/tags" },
-      { title: "Account", icon: "mdi-account", link: "#/account" },
-    ],
-  }),
-  methods: {
-    logout: function () {
-      fetch("http://localhost:8081/api/v1/auth", {
-        method: "DELETE",
-        headers: {
-          "X-StoRe-Session": getSessionId(),
-        },
-      });
+@Component
+export default class AppDrawer extends Vue {
+  get name() {
+    return "NavigationDrawer";
+  }
 
-      deleteSessionId();
+  drawer = true;
+  fixedDrawer = false;
+  folders = [
+    { title: "Home", icon: "mdi-home", link: "#/" },
+    { title: "Tags", icon: "mdi-tag-multiple", link: "#/tags" },
+    { title: "Account", icon: "mdi-account", link: "#/account" },
+  ];
 
-      this.$router.push({ name: "Login" });
-    },
-  },
-});
+  logout() {
+    fetch("http://localhost:8081/api/v1/auth", {
+      method: "DELETE",
+      headers: {
+        "X-StoRe-Session": getSessionId(),
+      },
+    });
+
+    deleteSessionId();
+    this.$router.push({ name: "Login" });
+  }
+}
 </script>
