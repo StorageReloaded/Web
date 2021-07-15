@@ -4,13 +4,23 @@
       <v-container>
         <v-row>
           <v-col
+            cols="auto"
+            lg="3"
+            md="4"
+            sm="6"
+            xs="12"
             v-for="database in databases"
             :key="database.name"
-            cols="3"
-            md="2"
           >
-            <v-card height="150" width="500" :to="'/list/' + database.id">
+            <v-card :to="'/list/' + database.id">
               <v-card-title>{{ database.name }}</v-card-title>
+              <v-card-text> Text </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn text color="primary">
+                  <v-icon left> mdi-pencil </v-icon> Edit
+                </v-btn>
+              </v-card-actions>
             </v-card>
           </v-col>
         </v-row>
@@ -29,7 +39,7 @@ import { Database } from "@/model/model";
 @Component
 export default class List extends Vue {
   databases: Array<Database> = [];
-  
+
   mounted(): void {
     fetch(getServerAddress() + "/api/v1/databases", {
       headers: {
