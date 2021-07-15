@@ -68,10 +68,10 @@ import { Tag } from "@/model/model";
 @Component({ components: { AppDrawer } })
 export default class Tags extends Vue {
   tags: Array<Tag> = [];
-  selected: any = null;
+  selected: number = null;
   selectedTag: Tag = null;
 
-  mounted() {
+  mounted(): void {
     fetch(getServerAddress() + "/api/v1/tags", {
       headers: {
         "X-StoRe-Session": getSessionId(),

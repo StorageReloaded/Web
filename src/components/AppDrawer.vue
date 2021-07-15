@@ -76,10 +76,6 @@ import { getSessionId, deleteSessionId } from "../api/storage";
 
 @Component
 export default class AppDrawer extends Vue {
-  get name() {
-    return "NavigationDrawer";
-  }
-
   drawer = true;
   fixedDrawer = false;
   folders = [
@@ -88,7 +84,7 @@ export default class AppDrawer extends Vue {
     { title: "Account", icon: "mdi-account", link: "#/account" },
   ];
 
-  logout() {
+  logout(): void {
     fetch("http://localhost:8081/api/v1/auth", {
       method: "DELETE",
       headers: {

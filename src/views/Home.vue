@@ -33,7 +33,7 @@ import { Database } from "@/model/model";
 export default class List extends Vue {
   databases: Array<Database> = [];
   
-  mounted() {
+  mounted(): void {
     fetch(getServerAddress() + "/api/v1/databases", {
       headers: {
         "X-StoRe-Session": getSessionId(),

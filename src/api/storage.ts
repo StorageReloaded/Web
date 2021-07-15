@@ -1,6 +1,6 @@
 import {completeUrl} from "@/api/utils"
 
-function setCookie(name: string, value: string, remember: boolean) {
+function setCookie(name: string, value: string, remember: boolean): void {
     const date = new Date();
     date.setFullYear(date.getFullYear() + 10);
     const exp = remember ? "; expires=" + date.toUTCString() : "";
@@ -8,7 +8,7 @@ function setCookie(name: string, value: string, remember: boolean) {
     document.cookie = name + "=" + value + exp + "; path=/";
 }
 
-function getCookie(name: string) {
+function getCookie(name: string): string {
     name += "=";
     const ca = document.cookie.split(';');
     for (let i = 0; i < ca.length; i++) {
@@ -31,7 +31,7 @@ export function getSessionId(): string {
     return getCookie("sessionId");
 }
 
-export function setSessionId(sessionId: string, remember: boolean) {
+export function setSessionId(sessionId: string, remember: boolean): void {
     setCookie("sessionId", sessionId, remember);
 }
 

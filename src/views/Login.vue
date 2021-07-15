@@ -71,7 +71,7 @@
 
 <script lang="ts">
 import { setSessionId, setServerAddress } from "@/api/storage";
-import {completeUrl} from "@/api/utils"
+import { completeUrl } from "@/api/utils";
 import Vue from "vue";
 import Component from "vue-class-component";
 
@@ -85,7 +85,7 @@ export default class Login extends Vue {
     password: "",
   };
 
-  login() {
+  login(): void {
     fetch(completeUrl(this.url) + "/api/v1/auth", {
       method: "POST",
       headers: {

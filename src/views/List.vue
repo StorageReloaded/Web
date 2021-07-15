@@ -107,13 +107,13 @@ import { Item, Location } from "@/model/model";
 
 @Component({ components: { AppDrawer } })
 export default class List extends Vue {
-  selected: any = null;
+  selected: number = null;
   baseItems: Array<Item> = [];
   locations: Array<Location> = [];
   selectedItem: Item = null;
 
   // gives back all items that should be shown
-  get items() {
+  get items(): Array<Item> {
     let items: Array<Item> = [];
     this.baseItems.forEach((item) => {
       if (
@@ -126,7 +126,7 @@ export default class List extends Vue {
     return items;
   }
 
-  update() {
+  update(): void {
     fetch(getServerAddress() + "/api/v1/item/" + this.selectedItem.id, {
       method: "POST",
       headers: {
@@ -137,7 +137,7 @@ export default class List extends Vue {
     });
   }
 
-  remove() {
+  remove(): void {
     fetch(getServerAddress() + "/api/v1/item/" + this.selectedItem.id, {
       method: "DELETE",
       headers: {
@@ -147,7 +147,7 @@ export default class List extends Vue {
     });
   }
 
-  mounted() {
+  mounted(): void {
     getLocations().then((data) => {
       data.forEach((location) => {
         this.locations[location.id] = location;
