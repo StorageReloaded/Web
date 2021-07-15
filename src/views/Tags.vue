@@ -57,20 +57,22 @@
   </v-app>
 </template>
 
-<script>
-import { getSessionId, getServerAddress } from "@/api/storage";
+<script lang="ts">
+import Vue from "vue";
+import Component from "vue-class-component";
 import AppDrawer from "@/components/AppDrawer.vue";
-//Was schreibe ich jetzt hier rein?
-export default {
-  components: { AppDrawer },
-  data: () => ({
-    tags: [], //An empty array for storing the databases.
-    selected: null, //A boolean for the selection event.
-    selection: -1, //A integer for determining the selected item. Default -1
-  }),
+
+import { getSessionId, getServerAddress } from "@/api/storage";
+import { Tag } from "@/model/model";
+
+@Component({ components: { AppDrawer } })
+export default class Tags extends Vue {
+  tags: Array<Tag> = [];
+  selected: any = null;
+  selectedTag: Tag = null;
+
   mounted() {
     fetch(getServerAddress() + "/api/v1/tags", {
-      //Fetch tags from Server
       headers: {
         "X-StoRe-Session": getSessionId(),
       },
@@ -79,6 +81,6 @@ export default {
       .then((data) => {
         this.tags = data;
       });
-  },
-};
+  }
+}
 </script>
