@@ -1,7 +1,5 @@
 <template>
   <v-app>
-    <app-drawer></app-drawer>
-
     <v-main class="grey">
       <v-container>
         <v-card width="500" style="margin: auto">
@@ -23,13 +21,3 @@
     </v-main>
   </v-app>
 </template>
-
-<script>
-import AppDrawer from "@/components/AppDrawer.vue";
-
-export default {
-  components: {
-    AppDrawer,
-  },
-};
-</script>

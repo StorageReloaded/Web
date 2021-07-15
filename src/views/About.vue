@@ -1,8 +1,5 @@
 <template>
   <v-app>
-    <!-- TODO: could be better -->
-    <app-drawer></app-drawer>
-
     <v-container fill-height fluid>
       <div class="mx-auto" width="600" outlined style="padding: 32px">
         <v-img
@@ -22,8 +19,7 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import AppDrawer from "@/components/AppDrawer.vue";
 
-@Component({ components: { AppDrawer } })
+@Component
 export default class About extends Vue {}
 </script>

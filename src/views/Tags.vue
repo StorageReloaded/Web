@@ -1,6 +1,5 @@
 <template>
   <v-app>
-    <app-drawer></app-drawer>
     <v-main>
       <v-row>
         <v-col>
@@ -53,12 +52,11 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import AppDrawer from "@/components/AppDrawer.vue";
 
 import { getSessionId, getServerAddress } from "@/api/storage";
 import { Tag } from "@/model/model";
 
-@Component({ components: { AppDrawer } })
+@Component
 export default class Tags extends Vue {
   tags: Array<Tag> = [];
   selected: number = null;

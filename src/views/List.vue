@@ -1,6 +1,5 @@
 <template>
   <v-app>
-    <app-drawer></app-drawer>
     <v-main>
       <v-row>
         <v-col>
@@ -93,13 +92,12 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
-import AppDrawer from "@/components/AppDrawer.vue";
 
 import { getSessionId, getServerAddress } from "@/api/storage";
 import { getItems, getLocations } from "@/api/network";
 import { Item, Location } from "@/model/model";
 
-@Component({ components: { AppDrawer } })
+@Component
 export default class List extends Vue {
   selected: number = null;
   baseItems: Array<Item> = [];

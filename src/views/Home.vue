@@ -1,7 +1,5 @@
 <template>
   <v-app>
-    <app-drawer></app-drawer>
-
     <v-main>
       <v-container>
         <v-row>
@@ -26,10 +24,9 @@ import Vue from "vue";
 import Component from "vue-class-component";
 
 import { getSessionId, getServerAddress } from "@/api/storage";
-import AppDrawer from "@/components/AppDrawer.vue";
 import { Database } from "@/model/model";
 
-@Component({ components: { AppDrawer } })
+@Component
 export default class List extends Vue {
   databases: Array<Database> = [];
   
