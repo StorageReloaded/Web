@@ -32,6 +32,16 @@
 
           <v-list-item-title>Logout</v-list-item-title>
         </v-list-item>
+
+        <v-divider></v-divider>
+
+        <v-list-item link href="#/about/">
+          <v-list-item-icon>
+            <v-icon>mdi-information-outline</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-title>About</v-list-item-title>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
