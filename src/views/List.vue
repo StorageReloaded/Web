@@ -5,52 +5,46 @@
       <v-row>
         <v-col>
           <v-container>
-            <v-card v-if="items.length > 0">
-              <!-- Check if there are tags available for display -->
-              <v-list two-line>
-                <v-list-item-group v-model="selected">
-                  <template v-for="(item, index) in items">
-                    <!-- For every item a list item -->
-                    <v-list-item
-                      v-on:click="selectedItem = items[index]"
-                      :key="item.name"
-                    >
-                      <v-list-item-avatar>
-                        <v-img :src="item.image"></v-img>
-                      </v-list-item-avatar>
+            <!-- Check if there are tags available for display -->
+            <v-list
+              v-if="items.length > 0"
+              two-line
+              elevation="1"
+              style="border-radius: 8px"
+            >
+              <v-list-item-group v-model="selected">
+                <template v-for="(item, index) in items">
+                  <!-- For every item a list item -->
+                  <v-list-item
+                    v-on:click="selectedItem = items[index]"
+                    :key="item.name"
+                  >
+                    <v-list-item-avatar>
+                      <v-img :src="item.image"></v-img>
+                    </v-list-item-avatar>
 
-                      <v-list-item-content>
-                        <v-list-item-title
-                          v-text="item.name"
-                        ></v-list-item-title>
+                    <v-list-item-content>
+                      <v-list-item-title v-text="item.name"></v-list-item-title>
 
-                        <v-list-item-subtitle
-                          v-text="item.description"
-                        ></v-list-item-subtitle>
-                      </v-list-item-content>
+                      <v-list-item-subtitle
+                        v-text="item.description"
+                      ></v-list-item-subtitle>
+                    </v-list-item-content>
+                  </v-list-item>
 
-                      <v-list-item-action>
-                        <v-btn icon>
-                          <v-icon color="grey lighten-1"
-                            >mdi-information</v-icon
-                          >
-                        </v-btn>
-                      </v-list-item-action>
-                    </v-list-item>
+                  <v-divider
+                    v-if="index + 1 != items.length"
+                    :key="index"
+                    inset
+                  >
+                    <!-- Only divide if there is another item after it -->
+                  </v-divider>
+                </template>
+              </v-list-item-group>
+            </v-list>
 
-                    <v-divider
-                      v-if="index + 1 != items.length"
-                      :key="index"
-                      inset
-                    >
-                      <!-- Only divide if there is another item after it -->
-                    </v-divider>
-                  </template>
-                </v-list-item-group>
-              </v-list>
-            </v-card>
+            <!-- If no databases/Items are found, this card is shown. -->
             <v-card v-else width="max-content" style="margin: auto">
-              <!-- If no databases/Items are found, this card is shown. -->
               <v-card-title>
                 Whoops! No item has been added to your collection yet!
               </v-card-title>
