@@ -65,6 +65,10 @@
       <v-btn icon>
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
+
+      <v-btn icon v-on:click="$vuetify.theme.dark = !$vuetify.theme.dark">
+        <v-icon>{{ $vuetify.theme.dark ?  "mdi-brightness-4" : "mdi-brightness-7" }}</v-icon>
+      </v-btn>
     </v-app-bar>
   </div>
 </template>
